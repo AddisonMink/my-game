@@ -1,6 +1,5 @@
 {
   "name": "player",
-  "image": "player.png",
   "rows": 4,
   "cols": 6,
   "animations": [

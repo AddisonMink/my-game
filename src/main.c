@@ -4,15 +4,41 @@
 
 #include "raylib.h"
 
-#include "json/json.h"
+#include "resources/spritesheet.h"
+
+typedef struct
+{
+    SpritesheetId spritesheet;
+    AnimationId animation;
+    float time;
+} State;
+
+State state = {
+    .spritesheet = -1,
+    .animation = -1,
+    .time = 0,
+};
+
+static void init()
+{
+    SpritesheetLoad("player");
+    state.spritesheet = SpritesheetGetId("player");
+    state.animation = SpritesheeetGetAnimationId(state.spritesheet, "walk-down");
+}
+
+static void deinit()
+{
+    SpritesheetUnloadAll();
+}
 
 static void update()
 {
     const float delta = GetFrameTime();
-    // Update here.
+    state.time += delta;
 
     BeginDrawing();
     ClearBackground(BLACK);
+    SpritesheetDrawAnimation(state.spritesheet, state.animation, state.time, (Vector2){0, 0});
     EndDrawing();
 }
 
@@ -20,8 +46,8 @@ int main(void)
 {
     const int screenWidth = 800;
     const int screenHeight = 450;
-    InitWindow(screenWidth, screenHeight, "Template-5.0.0");
-    // Initialize here.
+    InitWindow(screenWidth, screenHeight, "my-game");
+    init();
 
 #if defined(PLATFORM_WEB)
     emscripten_set_main_loop(update, 0, 1);
@@ -34,6 +60,6 @@ int main(void)
 #endif
 
     CloseWindow();
-    // Deinitialize here.
+    deinit();
     return 0;
 }
