@@ -1,0 +1,7 @@
+{
+  "name": "forest-tiles",
+  "image": "forest-tiles.png",
+  "rows": 4,
+  "cols": 5,
+  "animations": []
+}

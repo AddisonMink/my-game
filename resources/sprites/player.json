@@ -1,0 +1,68 @@
+{
+  "name": "player",
+  "image": "player.png",
+  "rows": 4,
+  "cols": 6,
+  "animations": [
+    {
+      "name": "idle-down",
+      "start": 0,
+      "stop": 0
+    },
+    {
+      "name": "attack-down",
+      "start": 1,
+      "stop": 1
+    },
+    {
+      "name": "walk-down",
+      "start": 2,
+      "stop": 5
+    },
+    {
+      "name": "idle-up",
+      "start": 6,
+      "stop": 6
+    },
+    {
+      "name": "attack-up",
+      "start": 7,
+      "stop": 7
+    },
+    {
+      "name": "walk-up",
+      "start": 8,
+      "stop": 11
+    },
+    {
+      "name": "idle-left",
+      "start": 12,
+      "stop": 12
+    },
+    {
+      "name": "attack-left",
+      "start": 13,
+      "stop": 13
+    },
+    {
+      "name": "walk-left",
+      "start": 14,
+      "stop": 17
+    },
+    {
+      "name": "idle-right",
+      "start": 18,
+      "stop": 18
+    },
+    {
+      "name": "attack-right",
+      "start": 19,
+      "stop": 19
+    },
+    {
+      "name": "walk-right",
+      "start": 20,
+      "stop": 23
+    }
+  ]
+}
