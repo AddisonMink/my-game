@@ -4,7 +4,7 @@
 
 #include "raylib.h"
 
-#include "module/module.h"
+#include "json/json.h"
 
 static void update()
 {
@@ -13,7 +13,6 @@ static void update()
 
     BeginDrawing();
     ClearBackground(BLACK);
-    Module_Func();
     EndDrawing();
 }
 
