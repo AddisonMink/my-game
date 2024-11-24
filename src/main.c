@@ -5,25 +5,31 @@
 #include "raylib.h"
 
 #include "resources/spritesheet.h"
+#include "resources/tileset.h"
 
 typedef struct
 {
     SpritesheetId spritesheet;
     AnimationId animation;
+    TilesetId tileset;
     float time;
 } State;
 
 State state = {
     .spritesheet = -1,
     .animation = -1,
+    .tileset = -1,
     .time = 0,
 };
 
 static void init()
 {
     SpritesheetLoad("player");
+    SpritesheetLoad("forest-tiles");
+    TilesetLoad("forest-tiles");
     state.spritesheet = SpritesheetGetId("player");
     state.animation = SpritesheeetGetAnimationId(state.spritesheet, "walk-down");
+    state.tileset = TilesetGetId("forest-tiles");
 }
 
 static void deinit()
@@ -39,6 +45,7 @@ static void update()
     BeginDrawing();
     ClearBackground(BLACK);
     SpritesheetDrawAnimation(state.spritesheet, state.animation, state.time, (Vector2){0, 0});
+    TilesetDrawTile(state.tileset, 0, (Vector2){100, 0});
     EndDrawing();
 }
 

@@ -2,64 +2,64 @@
   "name": "forest-tiles",
   "tiles": [
     {
-      "walkable": "true"
+      "walkable": true
     },
     {
-      "walkable": "true"
+      "walkable": true
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "true"
+      "walkable": true
     },
     {
-      "walkable": "true"
+      "walkable": true
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "false"
+      "walkable": false
     },
     {
-      "walkable": "false"
+      "walkable": false
     }
   ]
 }

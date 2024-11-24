@@ -27,7 +27,7 @@ def compile_tileset(name):
 
   for tile in tiles:
     walkable = tile.find('properties').find('property').get('value')
-    out['tiles'].append({ 'walkable': walkable })
+    out['tiles'].append({ 'walkable': True if walkable == 'true' else False })
 
   return out
 
