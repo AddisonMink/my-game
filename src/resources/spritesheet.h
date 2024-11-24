@@ -14,7 +14,7 @@ void SpritesheetLoad(const char *name);
 
 SpritesheetId SpritesheetGetId(const char *name);
 
-AnimationId SpritesheeetGetAnimationId(SpritesheetId id, const char *name);
+AnimationId SpritesheetGetAnimationId(SpritesheetId id, const char *name);
 
 void SpritesheetDrawFrame(SpritesheetId id, int frame, Vector2 position);
 

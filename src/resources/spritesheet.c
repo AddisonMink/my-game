@@ -99,7 +99,7 @@ SpritesheetId SpritesheetGetId(const char *name)
   return -1;
 }
 
-AnimationId SpritesheeetGetAnimationId(SpritesheetId id, const char *name)
+AnimationId SpritesheetGetAnimationId(SpritesheetId id, const char *name)
 {
   const Spritesheet *sheet = &spritesheets[id];
   for (int i = 0; i < sheet->animationsCount; i++)

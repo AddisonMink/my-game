@@ -7,21 +7,12 @@
 #include "resources/spritesheet.h"
 #include "resources/tileset.h"
 #include "resources/map.h"
+#include "game/components.h"
+#include "game/entities/player.h"
+#include "game/systems/draw.h"
 
-typedef struct
-{
-    SpritesheetId spritesheet;
-    AnimationId animation;
-    MapId map;
-    float time;
-} State;
-
-State state = {
-    .spritesheet = -1,
-    .animation = -1,
-    .map = -1,
-    .time = 0,
-};
+MapId map;
+Entities entities;
 
 static void init()
 {
@@ -29,25 +20,25 @@ static void init()
     SpritesheetLoad("forest-tiles");
     TilesetLoad("forest-tiles");
     MapLoad("test-room");
-    state.spritesheet = SpritesheetGetId("player");
-    state.animation = SpritesheeetGetAnimationId(state.spritesheet, "walk-down");
-    state.map = MapGetId("test-room");
+    map = MapGetId("test-room");
+    EntitiesInit(&entities);
+    PlayerInit(&entities, 1, 1);
 }
 
 static void deinit()
 {
     SpritesheetUnloadAll();
+    TilesetUnloadAll();
+    MapUnloadAll();
 }
 
 static void update()
 {
     const float delta = GetFrameTime();
-    state.time += delta;
 
     BeginDrawing();
     ClearBackground(RAYWHITE);
-    MapDraw(state.map);
-    SpritesheetDrawAnimation(state.spritesheet, state.animation, state.time, (Vector2){100, 100});
+    DrawSystem(map, &entities);
     EndDrawing();
 }
 

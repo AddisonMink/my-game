@@ -12,7 +12,7 @@ WASM_SOURCE_LIBS = -Iwasm-lib/ -Isrc/
 WASM_OPT = -Lwasm-lib/ -lraylib wasm-lib/libraylib.a -DPLATFORM_WEB=1 -s USE_GLFW=3 -s WASM=1 -s USE_WEBGL2=1 --emrun
 WASM_OUT = -o "bin/wasm_game.html"
 
-CFILES = src/*/*.c
+CFILES = src/*/*.c src/*/*/*.c
 
 build_osx_x86:
 	$(OSX_COMPILER) src/main.c $(CFILES) $(OSX_X86_SOURCE_LIBS) $(OSX_OUT) $(OSX_X86_OPT)
