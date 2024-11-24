@@ -22,3 +22,6 @@ build_osx_arm:
 
 build_wasm:
 	$(WASM_COMPILER) src/main.c $(CFILES) $(WASM_SOURCE_LIBS) $(WASM_OUT) $(WASM_OPT)
+
+compile_maps:
+	python3 tools/map-compiler.py
