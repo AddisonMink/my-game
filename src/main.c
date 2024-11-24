@@ -6,19 +6,20 @@
 
 #include "resources/spritesheet.h"
 #include "resources/tileset.h"
+#include "resources/map.h"
 
 typedef struct
 {
     SpritesheetId spritesheet;
     AnimationId animation;
-    TilesetId tileset;
+    MapId map;
     float time;
 } State;
 
 State state = {
     .spritesheet = -1,
     .animation = -1,
-    .tileset = -1,
+    .map = -1,
     .time = 0,
 };
 
@@ -27,9 +28,10 @@ static void init()
     SpritesheetLoad("player");
     SpritesheetLoad("forest-tiles");
     TilesetLoad("forest-tiles");
+    MapLoad("test-room");
     state.spritesheet = SpritesheetGetId("player");
     state.animation = SpritesheeetGetAnimationId(state.spritesheet, "walk-down");
-    state.tileset = TilesetGetId("forest-tiles");
+    state.map = MapGetId("test-room");
 }
 
 static void deinit()
@@ -43,16 +45,16 @@ static void update()
     state.time += delta;
 
     BeginDrawing();
-    ClearBackground(BLACK);
-    SpritesheetDrawAnimation(state.spritesheet, state.animation, state.time, (Vector2){0, 0});
-    TilesetDrawTile(state.tileset, 0, (Vector2){100, 0});
+    ClearBackground(RAYWHITE);
+    MapDraw(state.map);
+    SpritesheetDrawAnimation(state.spritesheet, state.animation, state.time, (Vector2){100, 100});
     EndDrawing();
 }
 
 int main(void)
 {
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    const int screenWidth = MAP_WIDTH * SPRITE_SIZE_SCALED;
+    const int screenHeight = MAP_HEIGHT * SPRITE_SIZE_SCALED;
     InitWindow(screenWidth, screenHeight, "my-game");
     init();
 

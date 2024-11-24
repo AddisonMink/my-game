@@ -4,6 +4,7 @@
 
 #define SPRITE_SIZE 16
 #define SPRITE_SCALE 4
+#define SPRITE_SIZE_SCALED (SPRITE_SIZE * SPRITE_SCALE)
 
 typedef int SpritesheetId;
 

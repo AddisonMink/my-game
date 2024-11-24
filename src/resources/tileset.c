@@ -93,11 +93,15 @@ TilesetId TilesetGetId(const char *name)
 
 bool TileIsWalkable(TilesetId id, TileId tile)
 {
+  if (tile == -1)
+    return true;
   return tilesets[id].tiles[tile].walkable;
 }
 
 void TilesetDrawTile(TilesetId id, TileId tile, Vector2 position)
 {
+  if (tile == -1)
+    return;
   SpritesheetDrawFrame(tilesets[id].spritesheet, tile, position);
 }
 
