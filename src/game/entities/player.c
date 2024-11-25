@@ -22,6 +22,7 @@ void PlayerInit(Entities *entities, int x, int y)
       .width = 48,
       .height = 48,
       .solid = true,
+      .velocity = (Vector2){100, 0},
   };
 
   entities->controller[id].active = true;

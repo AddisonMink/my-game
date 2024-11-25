@@ -23,6 +23,7 @@ typedef struct
   float width;
   float height;
   bool solid;
+  Vector2 velocity;
 } Body;
 
 Rectangle BodyRect(const Body *body);

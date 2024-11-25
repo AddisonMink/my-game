@@ -9,7 +9,7 @@
 #include "resources/map.h"
 #include "game/components.h"
 #include "game/entities/player.h"
-#include "game/systems/draw.h"
+#include "game/systems/system.h"
 
 MapId map;
 Entities entities;
@@ -35,11 +35,7 @@ static void deinit()
 static void update()
 {
     const float delta = GetFrameTime();
-
-    BeginDrawing();
-    ClearBackground(RAYWHITE);
-    DrawSystem(map, &entities);
-    EndDrawing();
+    SystemUpdate(map, &entities, delta);
 }
 
 int main(void)

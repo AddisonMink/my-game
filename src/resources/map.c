@@ -88,6 +88,30 @@ void MapDraw(MapId id)
   }
 }
 
+bool MapCheckCollision(MapId id, Rectangle rect)
+{
+  const Map *map = &maps[id];
+
+  const int leftX = rect.x / SPRITE_SIZE_SCALED;
+  const int rightX = (rect.x + rect.width) / SPRITE_SIZE_SCALED;
+  const int topY = rect.y / SPRITE_SIZE_SCALED;
+  const int bottomY = (rect.y + rect.height) / SPRITE_SIZE_SCALED;
+
+  for (int y = topY; y <= bottomY; y++)
+  {
+    for (int x = leftX; x <= rightX; x++)
+    {
+      const int i = y * MAP_WIDTH + x;
+      if (!TileIsWalkable(map->tileset, map->tiles[i]))
+      {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
 void MapUnloadAll()
 {
   for (int i = 0; i < MAX_MAPS; i++)
