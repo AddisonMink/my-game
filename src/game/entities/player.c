@@ -8,7 +8,7 @@ void PlayerInit(Entities *entities, int x, int y)
   entities->active[id] = true;
 
   const SpritesheetId spritesheet = SpritesheetGetId("player");
-  const AnimationId animation = SpritesheetGetAnimationId(spritesheet, "idle-down");
+  const AnimationId animation = SpritesheetGetAnimationId(spritesheet, "walk-right");
   entities->animator[id] = (Animator){
       .active = true,
       .spritesheet = spritesheet,
