@@ -6,6 +6,14 @@
 
 typedef int EntityId;
 
+typedef enum
+{
+  LEFT,
+  RIGHT,
+  UP,
+  DOWN
+} Direction;
+
 #pragma region BASIC_COMPONENTS
 
 typedef struct
@@ -36,7 +44,8 @@ Vector2 BodyCenter(const Body *body);
 
 typedef struct
 {
-
+  Direction facing;
+  bool idle;
 } PlayerController;
 
 typedef struct
