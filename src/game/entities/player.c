@@ -2,7 +2,11 @@
 
 #include "raymath.h"
 
+#pragma region CONSTANTS
+
 static const float walkSpeed = 200;
+
+static const float attackDuration = 0.25;
 
 static const char *DirectionString(Direction dir)
 {
@@ -14,6 +18,10 @@ static const char *DirectionString(Direction dir)
   };
   return directionString[dir];
 }
+
+#pragma endregion
+
+#pragma region INITI
 
 void PlayerInit(Entities *entities, int x, int y)
 {
@@ -43,18 +51,43 @@ void PlayerInit(Entities *entities, int x, int y)
   entities->controller[id].active = true;
   entities->controller[id].type = CONTROLLER_PLAYER;
   entities->controller[id].data.player = (PlayerController){
+      .state = PLAYER_WALKING,
       .facing = RIGHT,
       .idle = true,
   };
 }
 
-void PlayerUpdate(Entities *entities, float delta)
-{
-  TraceLog(LOG_INFO, "PlayerUpdate");
+#pragma endregion
 
+#pragma region DECLARATIONS
+static void walkingStart(Entities *entities);
+static void walkingUpdate(Entities *entities, float delta);
+static void attackingStart(Entities *entities);
+static void attackingUpdate(Entities *entities, float delta);
+
+#pragma region WALKING
+
+static void walkingStart(Entities *entities)
+{
+  PlayerController *controller = &entities->controller[0].data.player;
+  Animator *animator = &entities->animator[0];
+
+  controller->state = PLAYER_WALKING;
+  controller->idle = true;
+  animator->animation = SpritesheetGetAnimationId(animator->spritesheet, TextFormat("idle-%s", DirectionString(controller->facing)));
+}
+
+static void walkingUpdate(Entities *entities, float delta)
+{
   PlayerController *controller = &entities->controller[0].data.player;
   Animator *animator = &entities->animator[0];
   Body *body = &entities->body[0];
+
+  if (IsKeyPressed(KEY_J))
+  {
+    attackingStart(entities);
+    return;
+  }
 
   const Direction oldFacing = controller->facing;
 
@@ -107,4 +140,46 @@ void PlayerUpdate(Entities *entities, float delta)
   animator->animation = animationId;
 
   body->velocity = Vector2Scale(Vector2Normalize(dir), walkSpeed);
+}
+
+#pragma endregion
+
+#pragma region ATTACKING
+
+static void attackingStart(Entities *entities)
+{
+  PlayerController *controller = &entities->controller[0].data.player;
+  Animator *animator = &entities->animator[0];
+  Body *body = &entities->body[0];
+
+  controller->state = PLAYER_ATTACKING;
+  controller->attackTime = 0;
+  animator->animation = SpritesheetGetAnimationId(animator->spritesheet, TextFormat("attack-%s", DirectionString(controller->facing)));
+  body->velocity = (Vector2){0, 0};
+}
+
+static void attackingUpdate(Entities *entities, float delta)
+{
+  PlayerController *controller = &entities->controller[0].data.player;
+
+  controller->attackTime += delta;
+
+  if (controller->attackTime >= attackDuration)
+  {
+    walkingStart(entities);
+  }
+}
+
+#pragma endregion
+
+void PlayerUpdate(Entities *entities, float delta)
+{
+  const PlayerController *controller = &entities->controller[0].data.player;
+  switch (controller->state)
+  {
+  case PLAYER_WALKING:
+    return walkingUpdate(entities, delta);
+  case PLAYER_ATTACKING:
+    return attackingUpdate(entities, delta);
+  }
 }

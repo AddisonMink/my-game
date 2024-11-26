@@ -44,8 +44,14 @@ Vector2 BodyCenter(const Body *body);
 
 typedef struct
 {
+  enum
+  {
+    PLAYER_WALKING,
+    PLAYER_ATTACKING,
+  } state;
   Direction facing;
   bool idle;
+  float attackTime;
 } PlayerController;
 
 typedef struct
