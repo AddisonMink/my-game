@@ -18,6 +18,7 @@ static void init()
 {
     SpritesheetLoad("player");
     SpritesheetLoad("forest-tiles");
+    SpritesheetLoad("objects");
     TilesetLoad("forest-tiles");
     MapLoad("test-room");
     map = MapGetId("test-room");

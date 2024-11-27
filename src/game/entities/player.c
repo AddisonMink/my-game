@@ -1,5 +1,7 @@
 #include "player.h"
 
+#include "player-weapon.h"
+
 #include "raymath.h"
 
 #pragma region CONSTANTS
@@ -156,6 +158,8 @@ static void attackingStart(Entities *entities)
   controller->attackTime = 0;
   animator->animation = SpritesheetGetAnimationId(animator->spritesheet, TextFormat("attack-%s", DirectionString(controller->facing)));
   body->velocity = (Vector2){0, 0};
+
+  PlayerWeaponInit(entities);
 }
 
 static void attackingUpdate(Entities *entities, float delta)

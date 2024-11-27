@@ -1,0 +1,12 @@
+{
+  "name": "objects",
+  "rows": 1,
+  "cols": 1,
+  "animations": [
+    {
+      "name": "cane",
+      "start": 0,
+      "stop": 0
+    }
+  ]
+}
