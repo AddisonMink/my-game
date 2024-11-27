@@ -26,5 +26,6 @@ void SystemUpdate(MapId map, Entities *entities, float delta)
   BeginDrawing();
   ClearBackground(RAYWHITE);
   DrawSystem(map, entities);
+  DrawFPS(10, 10);
   EndDrawing();
 }

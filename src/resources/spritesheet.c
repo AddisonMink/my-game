@@ -6,11 +6,15 @@
 #define MAX_ANIMATIONS 16
 #define ANIMATION_FPS 6
 
+#pragma region TYPES
+
 typedef struct
 {
   char name[32];
   int start;
   int stop;
+  bool flipX;
+  bool flipY;
 } Animation;
 
 typedef struct
@@ -26,6 +30,8 @@ typedef struct
 static bool loaded[MAX_SPRITESHEETS] = {false};
 static Spritesheet spritesheets[MAX_SPRITESHEETS];
 
+#pragma endregion
+
 #pragma region LOADING
 
 static bool extractAnimation(void *result, const Json *json)
@@ -34,7 +40,9 @@ static bool extractAnimation(void *result, const Json *json)
 
   return JsonObjectExtract(animation->name, json, "name", JsonExtractString) &&
          JsonObjectExtract(&animation->start, json, "start", JsonExtractInt) &&
-         JsonObjectExtract(&animation->stop, json, "stop", JsonExtractInt);
+         JsonObjectExtract(&animation->stop, json, "stop", JsonExtractInt) &&
+         JsonObjectExtract(&animation->flipX, json, "flipX", JsonExtractBool) &&
+         JsonObjectExtract(&animation->flipY, json, "flipY", JsonExtractBool);
 }
 
 static bool extractSpritesheet(void *result, const Json *json)
@@ -114,7 +122,7 @@ AnimationId SpritesheetGetAnimationId(SpritesheetId id, const char *name)
   return -1;
 }
 
-void SpritesheetDrawFrame(SpritesheetId id, int frame, Vector2 position)
+static void drawFrameFlipped(SpritesheetId id, int frame, Vector2 position, bool flipX, bool flipY)
 {
   const Spritesheet *sheet = &spritesheets[id];
   const int row = frame / sheet->cols;
@@ -123,8 +131,8 @@ void SpritesheetDrawFrame(SpritesheetId id, int frame, Vector2 position)
   const Rectangle source = {
       col * SPRITE_SIZE,
       row * SPRITE_SIZE,
-      SPRITE_SIZE,
-      SPRITE_SIZE,
+      flipX ? -SPRITE_SIZE : SPRITE_SIZE,
+      flipY ? -SPRITE_SIZE : SPRITE_SIZE,
   };
 
   const Rectangle dest = {
@@ -137,12 +145,17 @@ void SpritesheetDrawFrame(SpritesheetId id, int frame, Vector2 position)
   DrawTexturePro(sheet->texture, source, dest, (Vector2){0, 0}, 0, WHITE);
 }
 
+void SpritesheetDrawFrame(SpritesheetId id, int frame, Vector2 position)
+{
+  drawFrameFlipped(id, frame, position, false, false);
+}
+
 void SpritesheetDrawAnimation(SpritesheetId id, AnimationId animation, float time, Vector2 position)
 {
   const Spritesheet *sheet = &spritesheets[id];
   const Animation *anim = &sheet->animations[animation];
   const int frame = (int)(time * ANIMATION_FPS) % (anim->stop - anim->start + 1) + anim->start;
-  SpritesheetDrawFrame(id, frame, position);
+  drawFrameFlipped(id, frame, position, anim->flipX, anim->flipY);
 }
 
 void SpritesheetUnloadAll()

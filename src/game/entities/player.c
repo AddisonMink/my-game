@@ -139,7 +139,11 @@ static void walkingUpdate(Entities *entities, float delta)
   controller->facing = newFacing;
   controller->idle = idle;
 
-  animator->animation = animationId;
+  if (animationId != animator->animation)
+  {
+    animator->animation = animationId;
+    animator->time = 0;
+  }
 
   body->velocity = Vector2Scale(Vector2Normalize(dir), walkSpeed);
 }
