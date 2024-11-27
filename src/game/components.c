@@ -1,5 +1,16 @@
 #include "components.h"
 
+const char *DirectionToString(Direction dir)
+{
+  const static char *directionStrings[] = {
+      [LEFT] = "left",
+      [RIGHT] = "right",
+      [UP] = "up",
+      [DOWN] = "down",
+  };
+  return directionStrings[dir];
+}
+
 #pragma region BODY
 
 Rectangle BodyRect(const Body *body)

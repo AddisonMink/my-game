@@ -1,0 +1,35 @@
+{
+  "name": "player-tools",
+  "rows": 1,
+  "cols": 2,
+  "animations": [
+    {
+      "name": "sword-down",
+      "start": 0,
+      "stop": 0,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "sword-up",
+      "start": 0,
+      "stop": 0,
+      "flipX": false,
+      "flipY": true
+    },
+    {
+      "name": "sword-right",
+      "start": 1,
+      "stop": 1,
+      "flipX": false,
+      "flipY": false
+    },
+    {
+      "name": "sword-left",
+      "start": 1,
+      "stop": 1,
+      "flipX": true,
+      "flipY": false
+    }
+  ]
+}

@@ -10,17 +10,6 @@ static const float walkSpeed = 200;
 
 static const float attackDuration = 0.25;
 
-static const char *DirectionString(Direction dir)
-{
-  static const char *directionString[] = {
-      [UP] = "up",
-      [DOWN] = "down",
-      [LEFT] = "left",
-      [RIGHT] = "right",
-  };
-  return directionString[dir];
-}
-
 #pragma endregion
 
 #pragma region INITI
@@ -76,7 +65,7 @@ static void walkingStart(Entities *entities)
 
   controller->state = PLAYER_WALKING;
   controller->idle = true;
-  animator->animation = SpritesheetGetAnimationId(animator->spritesheet, TextFormat("idle-%s", DirectionString(controller->facing)));
+  animator->animation = SpritesheetGetAnimationId(animator->spritesheet, TextFormat("idle-%s", DirectionToString(controller->facing)));
 }
 
 static void walkingUpdate(Entities *entities, float delta)
@@ -132,7 +121,7 @@ static void walkingUpdate(Entities *entities, float delta)
     else
       animationType = "none";
     if (!TextIsEqual(animationType, "none"))
-      id = SpritesheetGetAnimationId(animator->spritesheet, TextFormat("%s-%s", animationType, DirectionString(newFacing)));
+      id = SpritesheetGetAnimationId(animator->spritesheet, TextFormat("%s-%s", animationType, DirectionToString(newFacing)));
     id;
   });
 
@@ -160,7 +149,7 @@ static void attackingStart(Entities *entities)
 
   controller->state = PLAYER_ATTACKING;
   controller->attackTime = 0;
-  animator->animation = SpritesheetGetAnimationId(animator->spritesheet, TextFormat("attack-%s", DirectionString(controller->facing)));
+  animator->animation = SpritesheetGetAnimationId(animator->spritesheet, TextFormat("attack-%s", DirectionToString(controller->facing)));
   body->velocity = (Vector2){0, 0};
 
   PlayerWeaponInit(entities);

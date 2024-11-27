@@ -16,9 +16,10 @@ static Vector2 DirectionVector(Direction dir)
 void PlayerWeaponInit(Entities *entities)
 {
   const EntityId id = 1;
+  const Direction facing = entities->controller[0].data.player.facing;
 
-  const SpritesheetId spritesheet = SpritesheetGetId("objects");
-  const AnimationId animation = SpritesheetGetAnimationId(spritesheet, "cane");
+  const SpritesheetId spritesheet = SpritesheetGetId("player-tools");
+  const AnimationId animation = SpritesheetGetAnimationId(spritesheet, TextFormat("sword-%s", DirectionToString(facing)));
 
   const Vector2 pos = ({
     const PlayerController *controller = &entities->controller[0].data.player;

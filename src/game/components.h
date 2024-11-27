@@ -14,6 +14,8 @@ typedef enum
   DOWN
 } Direction;
 
+const char* DirectionToString(Direction dir);
+
 #pragma region BASIC_COMPONENTS
 
 typedef struct
