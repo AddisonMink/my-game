@@ -44,8 +44,8 @@ void PlayerWeaponInit(Entities *entities, float timeToLive)
   entities->body[id] = (Body){
       .active = true,
       .pos = pos,
-      .width = 8,
-      .height = 8,
+      .width = 0,
+      .height = 0,
       .solid = false,
       .velocity = (Vector2){0, 0},
   };
