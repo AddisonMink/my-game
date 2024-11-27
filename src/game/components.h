@@ -14,7 +14,7 @@ typedef enum
   DOWN
 } Direction;
 
-const char* DirectionToString(Direction dir);
+const char *DirectionToString(Direction dir);
 
 #pragma region BASIC_COMPONENTS
 
@@ -39,6 +39,13 @@ typedef struct
 Rectangle BodyRect(const Body *body);
 
 Vector2 BodyCenter(const Body *body);
+
+typedef struct
+{
+  bool active;
+  float time;
+  float duration;
+} KillTimer;
 
 #pragma endregion
 
@@ -78,9 +85,12 @@ typedef struct
   bool active[MAX_ENTITIES];
   Animator animator[MAX_ENTITIES];
   Body body[MAX_ENTITIES];
+  KillTimer killTimer[MAX_ENTITIES];
   Controller controller[MAX_ENTITIES];
 } Entities;
 
 void EntitiesInit(Entities *entities);
+
+void EntitiesDelete(Entities *entities, EntityId id);
 
 #pragma endregion

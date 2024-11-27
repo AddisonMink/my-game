@@ -34,8 +34,18 @@ void EntitiesInit(Entities *entities)
     entities->active[i] = false;
     entities->animator[i].active = false;
     entities->body[i].active = false;
+    entities->killTimer[i].active = false;
     entities->controller[i].active = false;
   }
+}
+
+void EntitiesDelete(Entities *entities, EntityId id)
+{
+  entities->active[id] = false;
+  entities->animator[id].active = false;
+  entities->body[id].active = false;
+  entities->killTimer[id].active = false;
+  entities->controller[id].active = false;
 }
 
 #pragma endregion

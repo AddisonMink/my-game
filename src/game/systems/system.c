@@ -3,6 +3,7 @@
 #include "game/entities/player.h"
 #include "animate.h"
 #include "draw.h"
+#include "kill-timer.h"
 #include "move.h"
 
 void SystemUpdate(MapId map, Entities *entities, float delta)
@@ -22,6 +23,7 @@ void SystemUpdate(MapId map, Entities *entities, float delta)
 
   MoveSystem(map, entities, delta);
   AnimateSystem(entities, delta);
+  KillTimerSystem(entities, delta);
 
   BeginDrawing();
   ClearBackground(RAYWHITE);

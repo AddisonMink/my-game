@@ -13,7 +13,7 @@ static Vector2 DirectionVector(Direction dir)
   return directionVector[dir];
 };
 
-void PlayerWeaponInit(Entities *entities)
+void PlayerWeaponInit(Entities *entities, float timeToLive)
 {
   const EntityId id = 1;
   const Direction facing = entities->controller[0].data.player.facing;
@@ -48,5 +48,11 @@ void PlayerWeaponInit(Entities *entities)
       .height = 8,
       .solid = false,
       .velocity = (Vector2){0, 0},
+  };
+
+  entities->killTimer[id] = (KillTimer){
+      .active = true,
+      .duration = timeToLive,
+      .time = 0,
   };
 }

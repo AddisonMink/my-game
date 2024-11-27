@@ -152,7 +152,7 @@ static void attackingStart(Entities *entities)
   animator->animation = SpritesheetGetAnimationId(animator->spritesheet, TextFormat("attack-%s", DirectionToString(controller->facing)));
   body->velocity = (Vector2){0, 0};
 
-  PlayerWeaponInit(entities);
+  PlayerWeaponInit(entities, attackDuration);
 }
 
 static void attackingUpdate(Entities *entities, float delta)

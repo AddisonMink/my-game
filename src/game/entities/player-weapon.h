@@ -2,4 +2,4 @@
 
 #include "game/components.h"
 
-void PlayerWeaponInit(Entities *entities);
+void PlayerWeaponInit(Entities *entities, float timeToLive);
