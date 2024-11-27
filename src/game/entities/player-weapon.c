@@ -27,6 +27,7 @@ void PlayerWeaponInit(Entities *entities, float timeToLive)
 
   float width;
   float height;
+  int layer;
   const Vector2 pos = ({
     const Body *playerBody = &entities->body[0];
     const Vector2 playerCenter = BodyCenter(playerBody);
@@ -37,6 +38,7 @@ void PlayerWeaponInit(Entities *entities, float timeToLive)
     case UP:
       width = breadth;
       height = length;
+      layer = 0;
       pos = (Vector2){
           playerCenter.x - width / 2,
           playerCenter.y - playerBody->height / 2 - height + offset,
@@ -45,6 +47,7 @@ void PlayerWeaponInit(Entities *entities, float timeToLive)
     case DOWN:
       width = breadth;
       height = length;
+      layer = 2;
       pos = (Vector2){
           playerCenter.x - width / 2,
           playerCenter.y + playerBody->height / 2 - offset,
@@ -53,6 +56,7 @@ void PlayerWeaponInit(Entities *entities, float timeToLive)
     case LEFT:
       width = length;
       height = breadth;
+      layer = 2;
       pos = (Vector2){
           playerCenter.x - playerBody->width / 2 - width + offset,
           playerCenter.y - height / 2,
@@ -61,6 +65,7 @@ void PlayerWeaponInit(Entities *entities, float timeToLive)
     case RIGHT:
       width = length;
       height = breadth;
+      layer = 2;
       pos = (Vector2){
           playerCenter.x + playerBody->width / 2 - offset,
           playerCenter.y - height / 2,
@@ -77,6 +82,7 @@ void PlayerWeaponInit(Entities *entities, float timeToLive)
       .spritesheet = spritesheet,
       .animation = animation,
       .time = 0,
+      .layer = layer,
   };
 
   entities->body[id] = (Body){

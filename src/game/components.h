@@ -18,12 +18,15 @@ const char *DirectionToString(Direction dir);
 
 #pragma region BASIC_COMPONENTS
 
+#define MAX_ANIMATION_LAYERS 3
+
 typedef struct
 {
   bool active;
   SpritesheetId spritesheet;
   AnimationId animation;
   float time;
+  int layer;
 } Animator;
 
 typedef struct

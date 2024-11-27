@@ -28,6 +28,7 @@ void PlayerInit(Entities *entities, int x, int y)
       .spritesheet = spritesheet,
       .animation = animation,
       .time = 0,
+      .layer = 1,
   };
 
   entities->body[id] = (Body){
