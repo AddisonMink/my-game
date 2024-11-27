@@ -33,8 +33,8 @@ void PlayerInit(Entities *entities, int x, int y)
   entities->body[id] = (Body){
       .active = true,
       .pos = pos,
-      .width = 48,
-      .height = 48,
+      .width = 32,
+      .height = 32,
       .solid = true,
       .velocity = (Vector2){0, 0},
   };

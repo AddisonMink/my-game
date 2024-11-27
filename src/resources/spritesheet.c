@@ -1,5 +1,7 @@
 #include "spritesheet.h"
 
+#include "raymath.h"
+
 #include "json/json.h"
 
 #define MAX_SPRITESHEETS 16
@@ -15,6 +17,8 @@ typedef struct
   int stop;
   bool flipX;
   bool flipY;
+  int offsetX;
+  int offsetY;
 } Animation;
 
 typedef struct
@@ -42,7 +46,9 @@ static bool extractAnimation(void *result, const Json *json)
          JsonObjectExtract(&animation->start, json, "start", JsonExtractInt) &&
          JsonObjectExtract(&animation->stop, json, "stop", JsonExtractInt) &&
          JsonObjectExtract(&animation->flipX, json, "flipX", JsonExtractBool) &&
-         JsonObjectExtract(&animation->flipY, json, "flipY", JsonExtractBool);
+         JsonObjectExtract(&animation->flipY, json, "flipY", JsonExtractBool) &&
+         JsonObjectExtract(&animation->offsetX, json, "offsetX", JsonExtractInt) &&
+         JsonObjectExtract(&animation->offsetY, json, "offsetY", JsonExtractInt);
 }
 
 static bool extractSpritesheet(void *result, const Json *json)
@@ -155,7 +161,8 @@ void SpritesheetDrawAnimation(SpritesheetId id, AnimationId animation, float tim
   const Spritesheet *sheet = &spritesheets[id];
   const Animation *anim = &sheet->animations[animation];
   const int frame = (int)(time * ANIMATION_FPS) % (anim->stop - anim->start + 1) + anim->start;
-  drawFrameFlipped(id, frame, position, anim->flipX, anim->flipY);
+  const Vector2 pos = Vector2Add(position, Vector2Scale((Vector2){anim->offsetX, anim->offsetY}, SPRITE_SCALE));
+  drawFrameFlipped(id, frame, pos, anim->flipX, anim->flipY);
 }
 
 void SpritesheetUnloadAll()

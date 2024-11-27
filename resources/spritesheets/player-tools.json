@@ -8,28 +8,36 @@
       "start": 0,
       "stop": 0,
       "flipX": false,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": 0
     },
     {
       "name": "sword-up",
       "start": 0,
       "stop": 0,
       "flipX": false,
-      "flipY": true
+      "flipY": true,
+      "offsetX": 0,
+      "offsetY": 0
     },
     {
       "name": "sword-right",
       "start": 1,
       "stop": 1,
       "flipX": false,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": -2
     },
     {
       "name": "sword-left",
       "start": 1,
       "stop": 1,
       "flipX": true,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": -2
     }
   ]
 }

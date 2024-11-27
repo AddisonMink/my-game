@@ -15,5 +15,7 @@ void DrawSystem(MapId map, const Entities *entities)
     const Vector2 center = BodyCenter(body);
     const Vector2 pos = (Vector2){center.x - SPRITE_SIZE_SCALED / 2, center.y - SPRITE_SIZE_SCALED / 2};
     SpritesheetDrawAnimation(animator->spritesheet, animator->animation, animator->time, pos);
+
+    DrawRectangleLinesEx(BodyRect(body), 2, RED);
   }
 }

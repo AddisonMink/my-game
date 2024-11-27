@@ -8,84 +8,108 @@
       "start": 0,
       "stop": 0,
       "flipX": false,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": -4
     },
     {
       "name": "attack-down",
       "start": 1,
       "stop": 1,
       "flipX": false,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": -4
     },
     {
       "name": "walk-down",
       "start": 2,
       "stop": 5,
       "flipX": false,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": -4
     },
     {
       "name": "idle-up",
       "start": 6,
       "stop": 6,
       "flipX": false,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": -4
     },
     {
       "name": "attack-up",
       "start": 7,
       "stop": 7,
       "flipX": false,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": -4
     },
     {
       "name": "walk-up",
       "start": 8,
       "stop": 11,
       "flipX": false,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": -4  
     },
     {
       "name": "idle-right",
       "start": 12,
       "stop": 12,
       "flipX": false,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": -4
     },
     {
       "name": "attack-right",
       "start": 13,
       "stop": 13,
       "flipX": false,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": -4
     },
     {
       "name": "walk-right",
       "start": 14,
       "stop": 17,
       "flipX": false,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": -4
     },
     {
       "name": "idle-left",
       "start": 12,
       "stop": 12,
       "flipX": true,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": -4
     },
     {
       "name": "attack-left",
       "start": 13,
       "stop": 13,
       "flipX": true,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": -4
     },
     {
       "name": "walk-left",
       "start": 14,
       "stop": 17,
       "flipX": true,
-      "flipY": false
+      "flipY": false,
+      "offsetX": 0,
+      "offsetY": -4
     }
   ]
 }

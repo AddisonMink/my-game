@@ -2,6 +2,10 @@
 
 #include "raymath.h"
 
+static const float length = 14 * SPRITE_SCALE;
+static const float breadth = 8 * SPRITE_SCALE;
+static const float offset = 2 * SPRITE_SCALE;
+
 static Vector2 DirectionVector(Direction dir)
 {
   static const Vector2 directionVector[] = {
@@ -21,15 +25,49 @@ void PlayerWeaponInit(Entities *entities, float timeToLive)
   const SpritesheetId spritesheet = SpritesheetGetId("player-tools");
   const AnimationId animation = SpritesheetGetAnimationId(spritesheet, TextFormat("sword-%s", DirectionToString(facing)));
 
+  float width;
+  float height;
   const Vector2 pos = ({
-    const PlayerController *controller = &entities->controller[0].data.player;
     const Body *playerBody = &entities->body[0];
-
     const Vector2 playerCenter = BodyCenter(playerBody);
-    const Vector2 directionVector = DirectionVector(controller->facing);
-    const Vector2 playerEdge = Vector2Add(playerCenter, Vector2Scale(directionVector, playerBody->width / 2));
-    const Vector2 offset = Vector2Scale(directionVector, playerBody->width / 2);
-    Vector2Add(playerEdge, offset);
+
+    Vector2 pos = {0, 0};
+    switch (facing)
+    {
+    case UP:
+      width = breadth;
+      height = length;
+      pos = (Vector2){
+          playerCenter.x - width / 2,
+          playerCenter.y - playerBody->height / 2 - height + offset,
+      };
+      break;
+    case DOWN:
+      width = breadth;
+      height = length;
+      pos = (Vector2){
+          playerCenter.x - width / 2,
+          playerCenter.y + playerBody->height / 2 - offset,
+      };
+      break;
+    case LEFT:
+      width = length;
+      height = breadth;
+      pos = (Vector2){
+          playerCenter.x - playerBody->width / 2 - width + offset,
+          playerCenter.y - height / 2,
+      };
+      break;
+    case RIGHT:
+      width = length;
+      height = breadth;
+      pos = (Vector2){
+          playerCenter.x + playerBody->width / 2 - offset,
+          playerCenter.y - height / 2,
+      };
+      break;
+    }
+    pos;
   });
 
   entities->active[id] = true;
@@ -44,8 +82,8 @@ void PlayerWeaponInit(Entities *entities, float timeToLive)
   entities->body[id] = (Body){
       .active = true,
       .pos = pos,
-      .width = 0,
-      .height = 0,
+      .width = width,
+      .height = height,
       .solid = false,
       .velocity = (Vector2){0, 0},
   };
